@@ -1,13 +1,19 @@
 package player;
 
 public class Player {
-	private final String ID;
+	private int ID;
+	private String name;
 	
-	public Player(String id){
+	public Player(String name, int id){
 		ID = id;
+		this.name = name;
 	}
 	
-	public String getID(){
+	public String getName(){
+		return name;
+	}
+	
+	public int getID(){
 		return ID;
 	}
 }
