@@ -3,6 +3,8 @@
 .project
 .classpath
 .metadata
+.recommenders
+.settings
 
 \bin
 
