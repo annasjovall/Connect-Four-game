@@ -29,7 +29,7 @@ public class Writer {
 	}
 	
 	public static void main(String[] args){
-		String data = getDate() +  "anna panna stekte fläskk";
+		String data = getDate() +  "test sträng, utskrift";
 		save("AuditLog.txt", data);
 	}
 }

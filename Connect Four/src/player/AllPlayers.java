@@ -2,11 +2,11 @@ package player;
 
 import java.util.ArrayList;
 
-public class Players {
+public class AllPlayers {
 	private ArrayList<Player> list;
 	private int activePlayer;
 	
-	public Players(){
+	public AllPlayers(){
 		list = new ArrayList<>();
 	}
 	
