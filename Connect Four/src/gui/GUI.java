@@ -1,58 +1,55 @@
 package gui;
 
-import gui.button.ButtonClear;
 import gui.button.ButtonSubmit;
+
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import player.Player;
 import player.AllPlayers;
-import player.Board;
-import player.EndGame;
 
+/**
+ * 
+ * @author Anna Palmqvist Sjövall
+ *
+ * A visual of the surrounding elements of the connect 4, also creates it.
+ */
 public class GUI extends Application{	
-	private AllPlayers players = new AllPlayers();
-	private Scene scene;
+	private AllPlayers players = new AllPlayers(); //Creates an empty list of players
 	
-	public void endGame(){
-		
-	}
-	
-	public Parent test(){
+	/**
+	 * Creates a border pane and places all the elements in it.
+	 * @return Parent containing the parts
+	 */
+	public Parent setAllPartOfPanes(){
 		BorderPane root = new BorderPane();
-
-//		players.add(new Player("anna", Color.YELLOW));
-//		players.add(new Player("john", Color.RED));
-		
 		Connect4 drawGrid = new Connect4(players);
+		
 		root.setCenter(drawGrid.create());
 		root.setLeft(redPlayer());
 		root.setRight(yellowPlayer());
-		root.setBottom(createBottom());
 		root.setTop(createTop());
 		
 		return root;
 	}
 
-	
+	/**
+	 * Creates the vboxes in the left and right part of the border pane.
+	 * @param colorName The name of the color corresponding to the player
+	 * @return A VBox with a label, textfield, tile and submitbutton
+	 */
 	private VBox createSides(String colorName){
 		VBox vbox = new VBox();
 		double vboxSize = ScreenSize.size() / 5;
@@ -75,23 +72,41 @@ public class GUI extends Application{
 		return vbox;
 	}
 	
+	/**
+	 * Creates the VBox corresponding to the yellow player.
+	 * @return The VBox
+	 */
 	private VBox yellowPlayer(){
 		return createSides("yellow");
 	}
 	
-	private HBox createTop(){
-		HBox top = new HBox();
-		return top;
-	}
-	
+	/**
+	 * Creates the VBox corresponding to the yellow player.
+	 * @return The VBox
+	 */
 	private VBox redPlayer(){
 		return createSides("red");
-	}
+	}	
 	
-	public static void displayActivePlayer(Color activePlayer, int radius){
-		Disc disc = new Disc(activePlayer, radius);
+	/**
+	 * Creates the top HBox. Adds text at the top of the game.
+	 * @return The top HBox
+	 */
+	private HBox createTop(){
+		HBox top = new HBox();
+		Label label = new Label("Connect 4 game. Enter name before beginning to play.");
+		top.getChildren().add(label);
+		top.setAlignment(Pos.CENTER);
+		top.setPadding(new Insets(ScreenSize.size() / 20));
+		return top;
 	}
-	
+
+	/**
+	 * Creates a pop-up with given title, header and info text.
+	 * @param title The title of the pop-up
+	 * @param headerText The header text
+	 * @param infoText The information text
+	 */
 	public static void alert(String title, String headerText, String infoText) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle(title);
@@ -99,29 +114,25 @@ public class GUI extends Application{
 		alert.setContentText(infoText);
 		alert.showAndWait();
 	}
-	
-	
-	private HBox createBottom(){
-		HBox hbox = new HBox();
-		Button buttonClear = new ButtonClear().getButton();
-		Label label = new Label("hola");
-		
-		
-		//hbox.setSpacing(30); //byt till skalenligt
-	    hbox.getChildren().addAll(buttonClear, label);
-		return hbox;
-	}
 
+	/**
+	 * The main entry point for all JavaFX applications. 
+	 * The start method is called after the init method has returned, 
+	 * and after the system is ready for the application to begin running.
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		scene = new Scene(test(), ScreenSize.size(), ScreenSize.size());
+		Scene scene = new Scene(setAllPartOfPanes(), ScreenSize.size(), ScreenSize.size());
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 	
+	/**
+	 * Starts the program
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
-		
 	}
 }
