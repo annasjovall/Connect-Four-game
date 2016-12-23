@@ -18,7 +18,7 @@ public class ScreenSize {
 	 * Returns the size of the window. 
 	 * It is the smallest of the height and width of the screen. 
 	 * For marginal the window is a bit smaller than that.
-	 * @return
+	 * @return size of the window
 	 */
 	public static double size(){
 		Rectangle2D rectangleSize = Screen.getPrimary().getVisualBounds();
