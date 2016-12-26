@@ -3,6 +3,7 @@ package gui;
 import gui.button.ButtonSubmit;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -28,6 +29,9 @@ import player.AllPlayers;
  */
 public class GUI extends Application{	
 	private AllPlayers players = new AllPlayers(); //Creates an empty list of players
+	private String colorNameRed = "redPlayer"; //Headline name for player red
+	private String colorNameYellow = "yellowPlayer"; //Headline name for player yellow
+	private static Stage stage;
 	
 	/**
 	 * Creates a border pane and places all the elements in it.
@@ -78,7 +82,7 @@ public class GUI extends Application{
 	 * @return The VBox
 	 */
 	private VBox yellowPlayer(){
-		return createSides("yellow");
+		return createSides(colorNameYellow);
 	}
 	
 	/**
@@ -86,7 +90,7 @@ public class GUI extends Application{
 	 * @return The VBox
 	 */
 	private VBox redPlayer(){
-		return createSides("red");
+		return createSides(colorNameRed);
 	}	
 	
 	/**
@@ -103,30 +107,29 @@ public class GUI extends Application{
 	}
 
 	/**
-	 * Creates a pop-up with given title, header and info text.
-	 * @param title The title of the pop-up
-	 * @param headerText The header text
-	 * @param infoText The information text
-	 */
-	public static void alert(String title, String headerText, String infoText) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle(title);
-		alert.setHeaderText(headerText);
-		alert.setContentText(infoText);
-		alert.showAndWait();
-	}
-
-	/**
 	 * The main entry point for all JavaFX applications. 
 	 * The start method is called after the init method has returned, 
 	 * and after the system is ready for the application to begin running.
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		stage = primaryStage;
 		Scene scene = new Scene(setAllPartOfPanes(), ScreenSize.size(), ScreenSize.size());
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
+	}
+	
+	public static void clearGUI(){
+		stage.close();
+		Platform.runLater( () -> {
+			try {
+				new GUI().start( new Stage() );
+			} catch (Exception e) {
+				// TODO Auto-generated catch block//måste jag ha denna
+				e.printStackTrace();
+			}
+		} );
 	}
 	
 	/**

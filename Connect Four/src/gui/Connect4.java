@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import player.Board;
@@ -114,14 +118,15 @@ public class Connect4 {
 	 * @param column The column to drop the disc in
 	 */
 	private void allowedToDropDisc(int column) {
+		boolean dropSuccess = board.discCanDrop(column);
+		
 		try {
-			boolean dropSuccess = board.discCanDrop(column);
+			if (!players.twoPlayersAdded())
+				throw new IndexOutOfBoundsException();
 			if (dropSuccess)
 				dropDisc(new Disc(players.getActivePlayer().getColor(), RADIUS), column);
-			else
-				System.out.println("Ditt drag är ogilltigt");
 		} catch (IndexOutOfBoundsException e) {
-			GUI.alert("Warning", "Name players first", "Submit each players name respectivly");
+			Alerts.error("Warning", "Name players first", "Submit each players name respectivly");
 		}
 	}
 
@@ -134,24 +139,23 @@ public class Connect4 {
 	private void dropDisc(Disc disc, int column) {
 		int row = board.getRow(column);
 
-		changeGameStatus(column, row);
-
 		discPane.getChildren().add(disc);
 		disc.setTranslateX(column * TILE_SIZE);
 		TranslateTransition animation = new TranslateTransition(Duration.seconds(0.5), disc);
 		animation.setToY(row * TILE_SIZE);
 		animation.play();
-
+		
+		changeGameStatus(column, row);
 	}
 
 	/**
 	 * Clears the board and the visuals of discs and players. 
 	 * Creates the board again.
 	 */
-	private void clear() {
+	public void clear() {
 		board.clear();
 		players.clear();
-		create();
+		GUI.clearGUI();
 	}
 
 	/**
@@ -162,15 +166,16 @@ public class Connect4 {
 	 */
 	private void changeGameStatus(int column, int row) {
 		board.dropDisc(column, players.getActivePlayer());
-		if (end.win(row, column)) {
-			GUI.alert("Avslutat spel", "Grattis till vinsten " + players.getActivePlayer(), "");
-			clear();
-		}
-		if (end.filledBoard()) {
-			GUI.alert("Avslutat spel", "Inga fler drag kvar", "");
-			clear();
-		}
-		players.nextPlayer();
+		
+		if (end.win(row, column))
+			popUp("Grattis till vinsten " + players.getActivePlayer());
+		else if (end.filledBoard())
+			popUp("Inga fler drag kvar");
+		else
+			players.nextPlayer();
 	}
-
+	
+	private void popUp(String header){
+		Alerts.confirmation("Avslutat Spel", header, "Vill du starta om spelet?", this);
+	}
 }

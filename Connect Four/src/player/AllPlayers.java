@@ -51,4 +51,8 @@ public class AllPlayers {
 		list = new ArrayList<>();
 	}
 	
+	public boolean twoPlayersAdded(){
+		return list.size() == 2;
+	}
+	
 }
