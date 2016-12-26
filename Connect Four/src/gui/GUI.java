@@ -15,7 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Shape;
-import javafx.scene.text.TextAlignment;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import player.AllPlayers;
@@ -56,6 +56,7 @@ public class GUI extends Application{
 		double textFieldSize = ScreenSize.size() * 3 / 20;
 		
 		Label label = new Label("Name: " + colorName + "Player");
+		label.setFont(new Font(ScreenSize.calculateTileSize() / 5));
 		
 		TextField textField = new TextField ();
 		textField.setPrefWidth(textFieldSize);
