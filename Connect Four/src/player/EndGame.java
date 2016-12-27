@@ -1,5 +1,7 @@
 package player;
 
+import logg.Writer;
+
 /**
  * 
  * @author Anna Palmqvist Sjövall
@@ -7,7 +9,7 @@ package player;
  * A check for a board to see if current game should end.
  */
 public class EndGame{
-	private Board board; //
+	private Board board; //The board to check wins
 	
 	/**
 	 * Creates a check for the given board to see if the game should end.
@@ -53,6 +55,8 @@ public class EndGame{
 		return count == 4;
 	}
 	
+	
+	//DIAGONALEN FUNKAR INTE RIKTIGT
 	/**
 	 * Checks if the disc at place (row, col) forms a four-in-a-row in a diagonal (right or left shifted).
 	 * @param row The row of the disc to be checked
@@ -82,7 +86,9 @@ public class EndGame{
 	 * @return true if the disc forms a four-in-a-row
 	 */
 	public boolean win(int row, int col){
-		return checkColumns(row, col) || checkRows(row, col) || checkDiagonals(row, col);
+		boolean win = checkColumns(row, col) || checkRows(row, col) || checkDiagonals(row, col);
+		if(win) Writer.append("Spelaren " + board.get(row, col).get() + " har vunnit!");
+		return win;
 	}
 	
 	/**

@@ -1,5 +1,8 @@
 package gui;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import gui.button.ButtonSubmit;
 
 import javafx.application.Application;
@@ -15,6 +18,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -29,9 +34,11 @@ import player.AllPlayers;
  */
 public class GUI extends Application{	
 	private AllPlayers players = new AllPlayers(); //Creates an empty list of players
-	private String colorNameRed = "redPlayer"; //Headline name for player red
-	private String colorNameYellow = "yellowPlayer"; //Headline name for player yellow
+	private String colorNameRed = "red"; //Headline name for player red
+	private String colorNameYellow = "yellow"; //Headline name for player yellow
 	private static Stage stage;
+	private Map<String, Shape> mapCircles = new HashMap<>();
+	
 	
 	/**
 	 * Creates a border pane and places all the elements in it.
@@ -59,7 +66,7 @@ public class GUI extends Application{
 		double vboxSize = ScreenSize.size() / 5;
 		double textFieldSize = ScreenSize.size() * 3 / 20;
 		
-		Label label = new Label("Name: " + colorName + "Player");
+		Label label = new Label("Name: " + colorName);
 		label.setFont(new Font(ScreenSize.calculateTileSize() / 5));
 		
 		TextField textField = new TextField ();
@@ -68,14 +75,28 @@ public class GUI extends Application{
 		
 		ButtonSubmit submitButton = new ButtonSubmit(textField, textFieldSize, players, label);
 		
-		Shape tile = Tile.createTile((int)Math.round(vboxSize), ScreenSize.calculateTileSize() / 2);
+		//Shape tile = Tile.createTile((int)Math.round(vboxSize), ScreenSize.calculateTileSize() / 2);
 		
-		vbox.getChildren().addAll(label, textField, tile, submitButton.getButton());
+		//vbox.getChildren().addAll(label, textField, tile, submitButton.getButton());
+		vbox.getChildren().addAll(label, textField, submitButton.getButton(), createCircle(colorName));
 		
 		vbox.setSpacing(vboxSize / 20);
 		vbox.setPrefWidth(vboxSize);
 		return vbox;
 	}
+	
+	private Shape createCircle(String color){
+		Circle c = new Circle(0, 0, ScreenSize.calculateTileSize() / 2);
+		c.setStroke(Color.BLACK);
+		c.setFill(null);
+		c.setStrokeWidth(0.5);
+//		mapCircles.put(color, c);
+		return c;
+	}
+	
+//	public static Map<String, Shape> emptyCircles(){
+//		return mapCircles;
+//	}
 	
 	/**
 	 * Creates the VBox corresponding to the yellow player.
@@ -99,8 +120,10 @@ public class GUI extends Application{
 	 */
 	private HBox createTop(){
 		HBox top = new HBox();
-		Label label = new Label("Connect 4 game. Enter name before beginning to play.");
-		top.getChildren().add(label);
+		Label labelHead = new Label("Connect 4 game. Enter name before beginning to play.");
+		labelHead.setFont(new Font(ScreenSize.size() / 40));
+		
+		top.getChildren().addAll(labelHead);
 		top.setAlignment(Pos.CENTER);
 		top.setPadding(new Insets(ScreenSize.size() / 20));
 		return top;

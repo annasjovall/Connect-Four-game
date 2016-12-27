@@ -2,6 +2,8 @@ package player;
 
 import java.util.ArrayList;
 
+import logg.Writer;
+
 /**
  * 
  * @author Anna Palmqvist Sjövall
@@ -25,6 +27,7 @@ public class AllPlayers {
 	 * @return true if it was successful
 	 */
 	public boolean add(Player p){
+		Writer.append("Added player " + p);
 		return list.add(p);
 	}
 	

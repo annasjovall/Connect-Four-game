@@ -167,14 +167,18 @@ public class Connect4 {
 	private void changeGameStatus(int column, int row) {
 		board.dropDisc(column, players.getActivePlayer());
 		
-		if (end.win(row, column))
+		if (end.win(row, column)) //vunnit
 			popUp("Grattis till vinsten " + players.getActivePlayer());
-		else if (end.filledBoard())
+		else if (end.filledBoard()) //inga fler drag
 			popUp("Inga fler drag kvar");
-		else
+		else //fortsätt spela
 			players.nextPlayer();
 	}
 	
+	/**
+	 * Creates a Pop-up window with the given header. 
+	 * @param header The text going in the header
+	 */
 	private void popUp(String header){
 		Alerts.confirmation("Avslutat Spel", header, "Vill du starta om spelet?", this);
 	}

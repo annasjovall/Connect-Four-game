@@ -1,6 +1,8 @@
 package player;
 
 import java.util.Optional;
+
+import logg.Writer;
 /**
  * 
  * @author Anna Palmqvist Sjövall
@@ -21,6 +23,7 @@ public class Board {
 		this.rowSize = rowSize;
 		this.colSize = colSize;
 		board = new Player[rowSize][colSize];
+		Writer.start();
 	} 
 	
 	/**
@@ -36,6 +39,7 @@ public class Board {
 	 */
 	public void clear(){
 		board = new Player[rowSize][colSize];
+		Writer.stop();
 	}
 	
 	/**
@@ -88,7 +92,9 @@ public class Board {
 	 */
 	public void dropDisc(int col, Player player){
 		if(discCanDrop(col)){
-			set(getRow(col), col, player);
+			int row = getRow(col);
+			set(row, col, player);
+			Writer.append(player + " dropped disc at row: " + row + " and col: " + col);
 		}
 	}
 	
