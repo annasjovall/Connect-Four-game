@@ -87,7 +87,7 @@ public class EndGame{
 	 */
 	public boolean win(int row, int col){
 		boolean win = checkColumns(row, col) || checkRows(row, col) || checkDiagonals(row, col);
-		if(win) Writer.append("Spelaren " + board.get(row, col).get() + " har vunnit!");
+		if(win) Writer.append("Player " + board.get(row, col).get() + " has won!");
 		return win;
 	}
 	

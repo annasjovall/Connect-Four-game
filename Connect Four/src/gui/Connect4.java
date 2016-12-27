@@ -106,7 +106,7 @@ public class Connect4 {
 			
 			//drops disc if allowed
 			int column = col;
-			rectangle.setOnMouseClicked(e -> allowedToDropDisc(column)); 
+			rectangle.setOnMouseClicked(e -> allowedToDropDisc(column));
 			list.add(rectangle);
 		}
 		return list;
@@ -125,6 +125,7 @@ public class Connect4 {
 				throw new IndexOutOfBoundsException();
 			if (dropSuccess)
 				dropDisc(new Disc(players.getActivePlayer().getColor(), RADIUS), column);
+				GUI.updateActivePlayer(players.getActivePlayer().getColor());
 		} catch (IndexOutOfBoundsException e) {
 			Alerts.error("Warning", "Name players first", "Submit each players name respectivly");
 		}
