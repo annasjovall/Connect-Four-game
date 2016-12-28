@@ -1,5 +1,6 @@
 package gui;
 
+import board.AllPlayers;
 import gui.button.ButtonSubmit;
 
 import javafx.application.Application;
@@ -18,8 +19,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-import player.AllPlayers;
 
 /**
  * 

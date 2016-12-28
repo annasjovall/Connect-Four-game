@@ -16,7 +16,6 @@ public class Writer {
 	private static PrintWriter writer;
 	
 	public static void start(){
-		System.out.println(Date.getSimpleDate());
 		String filename = "logged: " + Date.getSimpleDate();
 		File file = new File(filename);
 

@@ -1,4 +1,4 @@
-package player;
+package board;
 
 import logg.Writer;
 
@@ -101,6 +101,7 @@ public class EndGame{
 				if(!board.get(row, col).isPresent()) return false;
 			}
 		}
+		Writer.append("Tied!");
 		return true;
 	}
 }

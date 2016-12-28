@@ -3,6 +3,10 @@ package gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import board.AllPlayers;
+import board.Board;
+import board.BoardSize;
+import board.EndGame;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,11 +19,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
-
-import player.Board;
-import player.BoardSize;
-import player.EndGame;
-import player.AllPlayers;
 
 /**
  * 

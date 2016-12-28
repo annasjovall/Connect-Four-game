@@ -1,9 +1,8 @@
 package gui;
 
+import board.BoardSize;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
-
-import player.BoardSize;
 
 /**
  * 
