@@ -19,11 +19,8 @@ public class Alerts {
 	 * @param infoText The information text
 	 */
 	public static void confirmation(String title, String header, String content, Connect4 connect4){
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle(title);
-		alert.setHeaderText(header);
-		alert.setContentText(content);
-
+		Alert alert = createAlert(title, header, content, AlertType.CONFIRMATION);
+		
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
 		    connect4.clear();
@@ -37,11 +34,20 @@ public class Alerts {
 	 * @param infoText The information text
 	 */
 	public static void error(String title, String header, String content){
-		Alert alert = new Alert(AlertType.WARNING);
+		createAlert(title, header, content, AlertType.WARNING)
+		.showAndWait();
+	}
+	
+	public static void information(String title, String header, String content){
+		createAlert(title, header, content, AlertType.INFORMATION)
+		.showAndWait();
+	}
+	
+	private static Alert createAlert(String title, String header, String content, AlertType type){
+		Alert alert = new Alert(type);
 		alert.setTitle(title);
 		alert.setHeaderText(header);
 		alert.setContentText(content);
-		
-		alert.showAndWait();
+		return alert;
 	}
 }

@@ -7,6 +7,7 @@ import board.AllPlayers;
 import board.Board;
 import board.BoardSize;
 import board.EndGame;
+import board.HighScore;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -167,10 +168,13 @@ public class Connect4 {
 	private void changeGameStatus(int column, int row) {
 		board.dropDisc(column, players.getActivePlayer());
 		
-		if (end.win(row, column)) //vunnit
-			popUp("Grattis till vinsten " + players.getActivePlayer());
-		else if (end.filledBoard()) //inga fler drag
-			popUp("Inga fler drag kvar");
+		if (end.win(row, column)){ //vunnit
+			popUpHS();
+			popUpConf("Congratulations on the win " + players.getActivePlayer());
+		}
+		else if (end.filledBoard()){ //inga fler drag
+			popUpConf("No more moves possible, tie");
+		}
 		else //fortsätt spela
 			players.nextPlayer();
 	}
@@ -179,7 +183,11 @@ public class Connect4 {
 	 * Creates a Pop-up window with the given header. 
 	 * @param header The text going in the header
 	 */
-	private void popUp(String header){
-		Alerts.confirmation("Avslutat Spel", header, "Vill du starta om spelet?", this);
+	private void popUpConf(String header){
+		Alerts.confirmation("Finished Game", header, "Would you like to play again?", this);
+	}
+	
+	private void popUpHS(){
+		Alerts.information("HighScore", "", HighScore.print());
 	}
 }

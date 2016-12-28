@@ -70,9 +70,6 @@ public class GUI extends Application{
 		
 		ButtonSubmit submitButton = new ButtonSubmit(textField, textFieldSize, players, label);
 		
-		//Shape tile = Tile.createTile((int)Math.round(vboxSize), ScreenSize.calculateTileSize() / 2);
-		
-		//vbox.getChildren().addAll(label, textField, submitButton.getButton());
 		vbox.getChildren().addAll(label, textField, submitButton.getButton(), createCircle(colorName, redPlayersCircle));
 		
 		vbox.setSpacing(vboxSize / 20);
@@ -146,7 +143,6 @@ public class GUI extends Application{
 			try {
 				new GUI().start( new Stage() );
 			} catch (Exception e) {
-				// TODO Auto-generated catch block//måste jag ha denna
 				e.printStackTrace();
 			}
 		} );

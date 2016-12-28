@@ -87,7 +87,11 @@ public class EndGame{
 	 */
 	public boolean win(int row, int col){
 		boolean win = checkColumns(row, col) || checkRows(row, col) || checkDiagonals(row, col);
-		if(win) Writer.append("Player " + board.get(row, col).get() + " has won!");
+		if(win) {
+			Player winner = board.get(row, col).get();
+			Writer.append("Player " + winner + " has won!");
+			HighScore.addWinner(winner);
+		}
 		return win;
 	}
 	
