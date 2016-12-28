@@ -175,14 +175,14 @@ public class Connect4 {
 	private void changeGameStatus(int column, int row) {
 		board.dropDisc(column, players.getActivePlayer());
 		
-		if (end.win(row, column)){ //vunnit
+		if (end.win(row, column)){ 
 			popUpHS();
 			popUpConf("Congratulations on the win " + players.getActivePlayer());
 		}
-		else if (end.filledBoard()){ //inga fler drag
+		else if (end.filledBoard()){ 
 			popUpConf("No more moves possible, tie");
 		}
-		else //fortsätt spela
+		else 
 			players.nextPlayer();
 	}
 	
