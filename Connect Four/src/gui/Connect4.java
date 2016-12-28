@@ -188,6 +188,6 @@ public class Connect4 {
 	}
 	
 	private void popUpHS(){
-		Alerts.information("HighScore", "", HighScore.print());
+		Alerts.information("HighScore", "Name and amount of wins", HighScore.print(" \t "));
 	}
 }

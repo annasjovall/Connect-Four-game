@@ -5,24 +5,29 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class HighScore {
-	private static Map<Player, Integer> map = new HashMap<>();
+	private static Map<String, Integer> map = new HashMap<>();
 	
-	public static Integer addWinner(Player player){
-		Integer value = map.get(player);
+	public static Integer addWinner(String name){
+		Integer value = map.get(name);
 		if (value == null)
-			return map.put(player, 1);
+			return map.put(name, 1);
 		
-		return map.put(player, value + 1);
+		return map.put(name, value + 1);
+	}
+	
+	//put if the player does not already exist
+	public static void putWinner(String name, Integer i){
+		map.putIfAbsent(name, i);
 	}
 	
 	//prints sorted list, decending order of amounts of wins
-	public static String print(){
+	public static String print(String separator){
 		StringBuilder sb = new StringBuilder();
 		
-		Map<Player, Integer> mapp = Sorter.sortByValue(map);
+		Map<String, Integer> mapp = Sorter.sortByValue(map);
 		
-		for(Entry<Player,Integer> e : mapp.entrySet()){
-			sb.append(e.getKey() + " has won: " + e.getValue() + " times.");
+		for(Entry<String,Integer> e : mapp.entrySet()){
+			sb.append(e.getKey() + separator + e.getValue());
 			sb.append("\n");
 		}
 		

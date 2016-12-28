@@ -5,6 +5,7 @@ import gui.button.ButtonSubmit;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -19,6 +20,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import logg.HighScoreLogg;
 
 /**
  * 
@@ -135,6 +138,15 @@ public class GUI extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
+		
+		HighScoreLogg.read(); //läs in från fil om finns
+		
+		//spara highscore när fönstret stängs
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+	          public void handle(WindowEvent we) {
+	              HighScoreLogg.save();
+	          }
+	      });        
 	}
 	
 	public static void clearGUI(){
@@ -147,14 +159,6 @@ public class GUI extends Application{
 			}
 		} );
 	}
-	
-	/**
-	 * Starts the program
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		launch(args);
-	}
 
 	public static void updateActivePlayer(Color color) {
 		if(color.equals(Color.RED)){
@@ -165,5 +169,13 @@ public class GUI extends Application{
 			yellowCircle.setFill(color);
 			redCircle.setFill(Color.TRANSPARENT);
 		}
+	}
+	
+	/**
+	 * Starts the program
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		launch(args);
 	}
 }

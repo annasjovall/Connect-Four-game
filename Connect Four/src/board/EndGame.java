@@ -90,7 +90,7 @@ public class EndGame{
 		if(win) {
 			Player winner = board.get(row, col).get();
 			Writer.append("Player " + winner + " has won!");
-			HighScore.addWinner(winner);
+			HighScore.addWinner(winner.getName());
 		}
 		return win;
 	}
