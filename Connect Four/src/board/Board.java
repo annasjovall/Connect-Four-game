@@ -121,4 +121,14 @@ public class Board {
 		return row;
 	}
 	
+	//rm after test
+	public void print(){
+	 	for(int row = 0; row < rowSize; row++){
+				for(int col = 0; col < colSize; col++){
+					System.out.print(board[row][col] + " ");
+				}
+			System.out.print("\n");
+			}
+		}
+	
 }

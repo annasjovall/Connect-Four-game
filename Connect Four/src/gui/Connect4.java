@@ -118,17 +118,24 @@ public class Connect4 {
 	 * @param column The column to drop the disc in
 	 */
 	private void allowedToDropDisc(int column) {
+		
+		//NÅGOT HÄR GER MIG EN BUGG
 		boolean dropSuccess = board.discCanDrop(column);
 		
-		try {
-			if (!players.twoPlayersAdded())
-				throw new IndexOutOfBoundsException();
-			if (dropSuccess)
+//		try {
+			if (players.twoPlayersAdded() && dropSuccess){
 				dropDisc(new Disc(players.getActivePlayer().getColor(), RADIUS), column);
 				GUI.updateActivePlayer(players.getActivePlayer().getColor());
-		} catch (IndexOutOfBoundsException e) {
-			Alerts.error("Warning", "Name players first", "Submit each players name respectivly");
-		}
+			}
+			else{
+				Alerts.error("Warning", "Name players first", "Submit each players name respectivly");
+			}
+//				throw new IndexOutOfBoundsException();
+			//else if (dropSuccess)
+				
+//		} catch (IndexOutOfBoundsException e) {
+			
+//		}
 	}
 
 	/**

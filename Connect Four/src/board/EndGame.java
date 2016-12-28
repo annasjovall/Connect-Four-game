@@ -1,5 +1,6 @@
 package board;
 
+import javafx.scene.paint.Color;
 import logg.Writer;
 
 /**
@@ -67,14 +68,20 @@ public class EndGame{
 		Player player = board.get(row, col).get();
 		int countleft = 0; //Counts the occurences of discs in the left diagonal "\"
 		int countright = 0; //Counts the occurences of discs in the right diagonal "/"
-		for(int i = -3; i <= 3; i++){
-			if(countleft == 4 || countright == 4) return true;
-			if(board.get(row + i, col + i).isPresent() && board.get(row + i, col + i).get().equals(player)) countleft++;
-			if(board.get(row - i, col - i).isPresent() && board.get(row - i, col - i).get().equals(player)) countright++;
-			else{
-				countleft = 0; 
-				countright = 0;
-			}
+		for (int i = -3; i <= 3; i++) {
+			String left = "( " + (row + i) + ", " + (col + i) + " )";
+			if (board.get(row + i, col + i).isPresent() && board.get(row + i, col + i).get().equals(player))
+				countleft++;
+			else countleft = 0;
+			
+			String right = "( " + (row - i) + ", " + (col - i) + " )";
+			if (board.get(row - i, col - i).isPresent() && board.get(row - i, col - i).get().equals(player))
+				countright++;
+			else countright = 0;
+			
+			if (countleft == 4 || countright == 4)
+				return true;
+
 		}
 		return countleft == 4 || countright == 4;
 	}
@@ -107,5 +114,26 @@ public class EndGame{
 		}
 		Writer.append("Tied!");
 		return true;
+	}
+	
+	public static void main(String[] args) {
+		Board board = new Board(6, 7);
+		Player p1 = new Player("anna", Color.RED);
+		Player p2 = new Player("david", Color.YELLOW);
+		EndGame eg = new EndGame(board);
+		board.print();
+		
+		board.dropDisc(3, p1);
+		board.dropDisc(4, p2);
+		board.dropDisc(4, p1);
+		board.dropDisc(5, p1);
+		board.dropDisc(5, p2);
+		board.dropDisc(5, p1);
+		board.dropDisc(6, p2);
+		board.dropDisc(6, p1);
+		board.dropDisc(6, p2);
+		board.dropDisc(6, p1);
+		System.out.println(eg.checkDiagonals(2, 6));
+		
 	}
 }

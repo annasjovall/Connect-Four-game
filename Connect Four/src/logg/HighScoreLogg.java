@@ -26,7 +26,7 @@ public class HighScoreLogg {
 				HighScore.putWinner(split[0], Integer.valueOf(split[1]));
 			}
 		} catch (NoSuchFileException f) {
-			// do nothing
+			// There is no file to read from
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
