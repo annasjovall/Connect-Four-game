@@ -54,6 +54,10 @@ public class AllPlayers {
 		list = new ArrayList<>();
 	}
 	
+	/**
+	 * Checks that both players have been added.
+	 * @return True if both players have been added
+	 */
 	public boolean twoPlayersAdded(){
 		return list.size() == 2;
 	}

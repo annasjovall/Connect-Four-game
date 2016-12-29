@@ -1,6 +1,5 @@
 package board;
 
-import javafx.scene.paint.Color;
 import logg.Writer;
 
 /**
@@ -56,8 +55,6 @@ public class EndGame{
 		return count == 4;
 	}
 	
-	
-	//DIAGONALEN FUNKAR INTE RIKTIGT
 	/**
 	 * Checks if the disc at place (row, col) forms a four-in-a-row in a diagonal (right or left shifted).
 	 * @param row The row of the disc to be checked

@@ -1,8 +1,6 @@
 package gui;
 
 import board.AllPlayers;
-import gui.button.ButtonSubmit;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -33,9 +31,9 @@ public class GUI extends Application{
 	private AllPlayers players = new AllPlayers(); //Creates an empty list of players
 	private String colorNameRed = "red"; //Headline name for player red
 	private String colorNameYellow = "yellow"; //Headline name for player yellow
-	private static Circle redCircle;
-	private static Circle yellowCircle;
-	private static Stage stage;	
+	private static Circle redCircle; //The circle under the title redPlayer
+	private static Circle yellowCircle; //The circle under the title yellowPlayer
+	private static Stage stage;	//The stage
 	
 	/**
 	 * Creates a border pane and places all the elements in it.
@@ -54,7 +52,7 @@ public class GUI extends Application{
 	}
 
 	/**
-	 * Creates the vboxes in the left and right part of the border pane.
+	 * Creates the VBoxes in the left and right part of the border pane.
 	 * @param colorName The name of the color corresponding to the player
 	 * @param redPlayersCircle TODO
 	 * @return A VBox with a label, textfield, tile and submitbutton
@@ -73,18 +71,23 @@ public class GUI extends Application{
 		
 		ButtonSubmit submitButton = new ButtonSubmit(textField, textFieldSize, players, label);
 		
-		vbox.getChildren().addAll(label, textField, submitButton.getButton(), createCircle(colorName, redPlayersCircle));
+		vbox.getChildren().addAll(label, textField, submitButton.getButton(), createCircle(redPlayersCircle));
 		
 		vbox.setSpacing(vboxSize / 20);
 		vbox.setPrefWidth(vboxSize);
 		return vbox;
 	}
 	
-	private Shape createCircle(String color, boolean redPlayersCircle){
+	/**
+	 * Creates the circles showing who's turn it is. Red starts.
+	 * @param redPlayersCircle If true, the red circle should be drawn. Otherwise it is the yellow one.
+	 * @return The Circle created
+	 */
+	private Shape createCircle(boolean redPlayersCircle){
 		Circle c = new Circle(0, 0, ScreenSize.calculateTileSize() / 2);
-		c.setStroke(Color.BLACK);
+		c.setStroke(Color.BLUE);
 		c.setFill(null);
-		c.setStrokeWidth(0.5);
+		c.setStrokeWidth(ScreenSize.calculateTileSize() / 30);
 		
 		if(redPlayersCircle) {
 			redCircle = c; 
@@ -130,6 +133,7 @@ public class GUI extends Application{
 	 * The main entry point for all JavaFX applications. 
 	 * The start method is called after the init method has returned, 
 	 * and after the system is ready for the application to begin running.
+	 * Reads and saves the highscore file.
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -139,9 +143,9 @@ public class GUI extends Application{
 		primaryStage.setResizable(false);
 		primaryStage.show();
 		
-		HighScoreLogg.read(); //läs in från fil om finns
+		HighScoreLogg.read(); //read earlier highscore from file
 		
-		//spara highscore när fönstret stängs
+		//save highscore as window closes
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 	          public void handle(WindowEvent we) {
 	              HighScoreLogg.save();
@@ -149,6 +153,9 @@ public class GUI extends Application{
 	      });        
 	}
 	
+	/**
+	 * Restarts the GUI.
+	 */
 	public static void clearGUI(){
 		stage.close();
 		Platform.runLater( () -> {
@@ -160,6 +167,10 @@ public class GUI extends Application{
 		} );
 	}
 
+	/**
+	 * Changes the display of who the active player is.
+	 * @param color The color of the active player
+	 */
 	public static void updateActivePlayer(Color color) {
 		if(color.equals(Color.RED)){
 			redCircle.setFill(color);

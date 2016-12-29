@@ -1,4 +1,4 @@
-package gui.button;
+package gui;
 
 import javafx.scene.control.TextField;
 import board.AllPlayers;

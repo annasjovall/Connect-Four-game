@@ -9,23 +9,19 @@ public class Date {
 	 */
 	public static String getDateWithTime(){
 		LocalDateTime date = java.time.LocalDateTime.now();
-		int year = date.getYear();
-		int month = date.getMonthValue();
-		int day = date.getDayOfMonth();
-		int hour = date.getHour();
-		int min = date.getMinute();
-		int sec = date.getSecond();
-		return hour + ":" + min + ":" + sec + " CET " 
-				+ month + "/" + day + "-" + year;
+
+		return date.getHour() + ":" + date.getMinute() + ":" + date.getSecond() + " CET " 
+				+ date.getMonthValue() + "/" + date.getDayOfMonth() + "-" + date.getYear();
 		}
 	
+	/**
+	 * Gets a string representing a more casual date form.
+	 * @return A string representing the date in the format hour:min year-month-day
+	 */
 	public static String getSimpleDate(){
 		LocalDateTime date = java.time.LocalDateTime.now();
-		int year = date.getYear();
-		int month = date.getMonthValue();
-		int hour = date.getHour();
-		int min = date.getMinute();
-		int day = date.getDayOfMonth();
-		return hour + ":" + min + " " + year + "-" + month + "-" + day; 
+		
+		return date.getHour() + ":" + date.getMinute() + " " 
+				+ date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth(); 
 	}
 }
