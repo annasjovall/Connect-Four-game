@@ -183,7 +183,12 @@ public class Connect4 {
 			popUpConf("No more moves possible, tie");
 		}
 		else 
-			players.nextPlayer();
+			next();
+	}
+	
+	
+	public void next(){
+		players.nextPlayer();
 	}
 	
 	/**

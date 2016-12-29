@@ -25,6 +25,9 @@ public class Alerts {
 		if (result.get() == ButtonType.OK){
 		    connect4.clear();
 		}
+		else if(result.get() == ButtonType.CANCEL){
+			connect4.next();
+		}
 	}
 	
 	/**
