@@ -8,14 +8,14 @@ import logg.Writer;
  * 
  * A check for a board to see if current game should end.
  */
-public class EndGame{
+public class WinOrTie{
 	private Board board; //The board to check wins
 	
 	/**
 	 * Creates a check for the given board to see if the game should end.
 	 * @param board The board to be checked
 	 */
-	public EndGame(Board board){
+	public WinOrTie(Board board){
 		this.board = board;
 	}
 	

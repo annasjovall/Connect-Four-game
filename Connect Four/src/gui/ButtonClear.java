@@ -8,13 +8,9 @@ public class ButtonClear {
 	private Button buttonClear; //The button
 	
 	/**
-	 * Creates a new ButtonSubmit with given dimensions. 
-	 * The text from the given TextField is used to create a new player.
-	 * The label over the TextField will change to contain the submitted text.
-	 * @param textField The TextField containing the submitted text
+	 * Creates a new ButtonClear with given dimensions named "Restart".
 	 * @param dimensions The size of the button
-	 * @param players The list of players
-	 * @param label The label over the TextField
+	 * @param connect4 The current connect4 game
 	 */
 	public ButtonClear(double dimensions, Connect4 connect4) {
 		buttonClear = new Button("Restart");
@@ -28,6 +24,10 @@ public class ButtonClear {
 		});
 	}
 	
+	/**
+	 * Gets the Button.
+	 * @return the Button
+	 */
 	public Button getButton(){
 		return buttonClear;
 	}

@@ -6,7 +6,7 @@ import java.util.List;
 import board.AllPlayers;
 import board.Board;
 import board.BoardSize;
-import board.EndGame;
+import board.WinOrTie;
 import board.HighScore;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -38,7 +38,7 @@ public class Connect4 {
 
 	private Board board; // The play board
 	private AllPlayers players; // The players in the game
-	private EndGame end; // The rules in the game
+	private WinOrTie end; // The rules in the game
 	private Pane discPane; //Pane to add disc in
 	
 	/**
@@ -48,7 +48,7 @@ public class Connect4 {
 	public Connect4(AllPlayers list) {
 		players = list;
 		board = new Board(ROWS, COLS);
-		end = new EndGame(board);
+		end = new WinOrTie(board);
 		discPane = new Pane();
 	}
 
@@ -123,7 +123,7 @@ public class Connect4 {
 		try {
 			if (players.twoPlayersAdded() && dropSuccess) {
 				dropDisc(new Disc(players.getActivePlayer().getColor(), RADIUS), column);
-				GUI.updateActivePlayer(players.getActivePlayer().getColor());
+				View.updateActivePlayer(players.getActivePlayer().getColor());
 			} else
 				Alerts.error("Warning", "Name players first", "Submit each players name respectivly");
 
@@ -155,7 +155,7 @@ public class Connect4 {
 	public void clear() {
 		board.clear();
 		players.clear();
-		GUI.clearGUI();
+		View.clearGUI();
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class Connect4 {
 	 * @param header The text going in the header
 	 */
 	private void popUpConf(String header){
-		Alerts.confirmation("Finished Game", header, "Would you like to play again?", this);
+		Alerts.restart("Finished Game", header, "Would you like to play again?", this);
 	}
 	
 	/**

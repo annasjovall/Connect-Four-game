@@ -27,7 +27,7 @@ import logg.HighScoreLogg;
  *
  * A visual of the surrounding elements of the connect 4, also creates it.
  */
-public class GUI extends Application{	
+public class View extends Application{	
 	private AllPlayers players = new AllPlayers(); //Creates an empty list of players
 	private String colorNameRed = "red"; //Headline name for player red
 	private String colorNameYellow = "yellow"; //Headline name for player yellow
@@ -52,6 +52,11 @@ public class GUI extends Application{
 		return root;
 	}
 	
+	/**
+	 * Creates the Bottom HBox containing a restart button.
+	 * @param connect4 The current connect4 board
+	 * @return The HBox containg the buttonclear
+	 */
 	private HBox createBottom(Connect4 connect4){
 		HBox bottom = new HBox();
 		
@@ -172,7 +177,7 @@ public class GUI extends Application{
 		stage.close();
 		Platform.runLater( () -> {
 			try {
-				new GUI().start( new Stage() );
+				new View().start( new Stage() );
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

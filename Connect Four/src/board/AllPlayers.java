@@ -22,16 +22,16 @@ public class AllPlayers {
 	}
 	
 	/**
-	 * Adds a player to the list.
+	 * Adds a player to the list. 
+	 * If a player of the same color is already added it is replaced.
 	 * @param p The player to be added
 	 * @return true if it was successful
 	 */
 	public boolean add(Player p){
 		Writer.append("Added player " + p);
 		if(list.contains(p)){
-			System.out.println("tar bort spelare " + p + " " + list.remove(p));
+			list.remove(p);
 		}
-		System.out.println("lägger till spelare" + p);
 		return list.add(p);
 	}
 	
@@ -62,9 +62,7 @@ public class AllPlayers {
 	 * Checks that both players have been added.
 	 * @return True if both players have been added
 	 */
-	public boolean twoPlayersAdded(){
-		System.out.println(list.size());
-		
+	public boolean twoPlayersAdded(){		
 		return list.size() == 2 && !list.get(0).equals(list.get(1));
 	}
 	

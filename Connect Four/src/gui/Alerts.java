@@ -17,18 +17,9 @@ public class Alerts {
 	 * @param content The information text
 	 * @param connect4 The connect4 game the pop-up should appear in
 	 */
-	public static void confirmation(String title, String header, String content, Connect4 connect4){
-		Alert alert = createAlert(title, header, content, AlertType.INFORMATION);
-			
-		Optional<ButtonType> result = alert.showAndWait();
-		
-		//Either clears or keeps the game going
-		if (result.get() == ButtonType.OK){
-		    connect4.clear();
-		}
-//		else if(result.get() == ButtonType.CANCEL){
-//			connect4.next();
-//		}
+	public static void restart(String title, String header, String content, Connect4 connect4){
+		information(title, header, content);
+		connect4.clear();
 	}
 	
 	/**
