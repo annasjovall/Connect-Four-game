@@ -47,8 +47,20 @@ public class GUI extends Application{
 		root.setLeft(redPlayer());
 		root.setRight(yellowPlayer());
 		root.setTop(createTop());
+		root.setBottom(createBottom(drawGrid));
 		
 		return root;
+	}
+	
+	private HBox createBottom(Connect4 connect4){
+		HBox bottom = new HBox();
+		
+		double textFieldSize = ScreenSize.size() * 3 / 20;
+		ButtonClear clear = new ButtonClear(textFieldSize, connect4);
+		
+		bottom.getChildren().add(clear.getButton());
+		return bottom;
+		
 	}
 
 	/**
