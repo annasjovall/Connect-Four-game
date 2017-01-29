@@ -28,6 +28,10 @@ public class AllPlayers {
 	 */
 	public boolean add(Player p){
 		Writer.append("Added player " + p);
+		if(list.contains(p)){
+			System.out.println("tar bort spelare " + p + " " + list.remove(p));
+		}
+		System.out.println("lägger till spelare" + p);
 		return list.add(p);
 	}
 	
@@ -59,7 +63,9 @@ public class AllPlayers {
 	 * @return True if both players have been added
 	 */
 	public boolean twoPlayersAdded(){
-		return list.size() == 2;
+		System.out.println(list.size());
+		
+		return list.size() == 2 && !list.get(0).equals(list.get(1));
 	}
 	
 }

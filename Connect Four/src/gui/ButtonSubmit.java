@@ -31,13 +31,13 @@ public class ButtonSubmit {
 	public ButtonSubmit(TextField textField, double dimensions, AllPlayers players, Label label) {
 		buttonSubmit = new Button("Submit");
 		buttonSubmit.setPrefWidth(dimensions);
+		Color color = label.getText().contains("red") ? Color.RED : Color.YELLOW;
 		
 		buttonSubmit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				submittedText = textField.getText();
 				if(allowed(submittedText)){
-					Color color = label.getText().contains("red") ? Color.RED : Color.YELLOW;
 					players.add(new Player(submittedText, color));
 					label.setText("Name: " + submittedText);
 				}
